@@ -2,15 +2,18 @@ package hello.aop;
 
 import hello.aop.order.OrderRepository;
 import hello.aop.order.OrderService;
+import hello.aop.order.aop.AspectV1;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @Slf4j
+@Import(AspectV1.class) //추가
 @SpringBootTest
 public class AopTest {
 
@@ -22,6 +25,7 @@ public class AopTest {
 
     /**
      * isAopProxy를 통해서 AOP프록시가 적용되었는지 확인, 적용전이므로 결과는 false여야 함
+     * AspectV1을 적용하였으면 true여야함
      */
     @Test
     void aopInfo() {
